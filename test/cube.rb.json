@@ -1,0 +1,23 @@
+{
+    "physics": {
+        "mass": "0",
+        "position": [0, 0, 0],
+        "material": "CubePhysicsMaterial"
+    },
+
+    "mesh": {
+        "geometry": {
+            "type": "BoxGeometry",
+            "args": [1, 1, 1]
+        },
+        "material": {
+            "type": "MeshStandardMaterial",
+            "properties": {
+                "color": "0x777777",
+                "flatShading": true
+            }
+        },
+        "cashShadow": true,
+        "receiveShadow": true
+    }
+}

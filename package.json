@@ -1,0 +1,22 @@
+{
+    "name": "my_three_lib_impl",
+    "version": "1.0.0",
+    "main": "webpack.config.js",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {
+        "cannon": "^0.6.2",
+        "three": "^0.127.0",
+        "webpack": "^5.33.2",
+        "webpack-cli": "^4.6.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}

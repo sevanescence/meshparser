@@ -1,0 +1,18 @@
+{
+    "mesh": {
+        "geometry": {
+            "type": "BoxGeometry",
+            "args": [1, 1, 1]
+        },
+        "material": {
+            "type": "MeshStandardMaterial",
+            "properties": {
+                "color": "0x777777",
+                "flatShading": true
+            }
+        },
+        "castShadow": true,
+        "receiveShadow": true,
+        "position": [0, 0, 0]
+    }
+}
