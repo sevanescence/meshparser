@@ -1,11 +1,11 @@
-import * as THREE from 'three';
-import * as CANNON from 'cannon';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE from "three";
+import * as CANNON from "cannon";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import MeshParser, { MeshConfiguration } from './meshparser';
-import RigidBody from './rigidbody';
-import World from './world';
-import { SphereGeometry } from 'three';
+import MeshParser, { MeshConfiguration } from "./meshparser";
+import RigidBody from "./rigidbody";
+import World from "./world";
+import { BufferGeometry, MeshStandardMaterial, SphereGeometry } from "three";
 
 const world = new World();
 
@@ -53,10 +53,18 @@ const cubePhysics = new CANNON.Body({
 //     world.scene.add(cube);
 // });
 
+// todo meshparser multi-mesh optimization middleware
+
+// async function initialize() {
+//     world.scene.add(await MeshParser.getMesh("./cube.mesh.json"));
+//     world.scene.add(await MeshParser.getMesh("./wall.mesh.json"));
+//     world.scene.add(await MeshParser.getMesh("./sphere.mesh.json"));
+// }
+
+// const meshURLs = ["./cube.mesh.json", "./wall.mesh.json", "./sphere.mesh.json"];
+
 async function initialize() {
-    world.scene.add(await MeshParser.getMesh('./cube.mesh.json'));
-    world.scene.add(await MeshParser.getMesh('./wall.mesh.json'));
-    world.scene.add(await MeshParser.getMesh('./sphere.mesh.json'));
+    world.scene.add(...(await MeshParser.getMeshes("./meshes.json")));
 }
 
 initialize();

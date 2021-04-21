@@ -1,9 +1,9 @@
-import * as THREE from 'three';
-import { BoxGeometry } from 'three';
+import * as THREE from "three";
+import { BoxGeometry } from "three";
 
 class GeometryConfiguration {
     constructor() {
-        this.type = '';
+        this.type = "";
         /** @type {number[]} */
         this.args = [];
     }
@@ -11,7 +11,7 @@ class GeometryConfiguration {
 
 class MaterialConfiguration {
     constructor() {
-        this.type = '';
+        this.type = "";
         this.properties = undefined;
     }
 }
@@ -88,7 +88,7 @@ export class MeshConfiguration {
             if (value instanceof Array && value.length === 3) {
                 meshJSON[key] = new THREE.Vector3(...value);
             }
-            if (key === 'customDepthMaterial') {
+            if (key === "customDepthMaterial") {
                 meshJSON[key] = new THREE.MeshDepthMaterial(value);
             }
             meshConfiguration.properties[key] = meshJSON[key];
@@ -111,7 +111,7 @@ export class MeshConfiguration {
      */
     static parseMeshMaterial(materialJSON) {
         for (const [key, value] of Object.entries(materialJSON.properties)) {
-            if (typeof value == 'string' && value.match(/^0x\d{3,6}/)) {
+            if (typeof value == "string" && value.match(/^0x\d{3,6}/)) {
                 materialJSON.properties[key] = parseInt(value);
             }
         }
@@ -132,6 +132,30 @@ export default class MeshParser {
     /**
      *
      * @param {string} url
+     * @return {Promise<THREE.Mesh[]>}
+     */
+    static async getMeshesByJSONListURL(url) {
+        return MeshParser.getMeshes(await fetch(url).then((r) => r.json()));
+    }
+    /**
+     *
+     * @param {string[] | string} meshUrlList
+     * @returns {Promise<THREE.Mesh[]>}
+     */
+    static async getMeshes(meshUrlList) {
+        if (typeof meshUrlList == "string") {
+            return MeshParser.getMeshesByJSONListURL(meshUrlList);
+        }
+
+        const meshes = [];
+        for (const url of meshUrlList) {
+            meshes.push(await MeshParser.getMesh(url));
+        }
+        return meshes;
+    }
+    /**
+     *
+     * @param {string} url
      * @return {Promise<MeshConfiguration>}
      */
     static async getMeshConfiguration(url) {
@@ -145,8 +169,13 @@ export default class MeshParser {
      * @return {THREE.Mesh}
      */
     static buildMesh(meshConfiguration) {
-        const mesh = new THREE.Mesh(meshConfiguration.geometry, meshConfiguration.material);
-        for (const [key, value] of Object.entries(meshConfiguration.properties)) {
+        const mesh = new THREE.Mesh(
+            meshConfiguration.geometry,
+            meshConfiguration.material
+        );
+        for (const [key, value] of Object.entries(
+            meshConfiguration.properties
+        )) {
             if (value instanceof THREE.Vector3) {
                 mesh[key].copy(value);
                 continue;
