@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import MeshParser, { MeshConfiguration } from './meshparser';
 import RigidBody from './rigidbody';
 import World from './world';
+import { SphereGeometry } from 'three';
 
 const world = new World();
 
@@ -55,6 +56,7 @@ const cubePhysics = new CANNON.Body({
 async function initialize() {
     world.scene.add(await MeshParser.getMesh('./cube.mesh.json'));
     world.scene.add(await MeshParser.getMesh('./wall.mesh.json'));
+    world.scene.add(await MeshParser.getMesh('./sphere.mesh.json'));
 }
 
 initialize();

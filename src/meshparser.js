@@ -32,6 +32,7 @@ const ThreeGeometries = {
     PolyhedronGeometry: THREE.PolyhedronGeometry,
     RingGeometry: THREE.RingGeometry,
     ShapeGeometry: THREE.ShapeGeometry,
+    SphereGeometry: THREE.SphereGeometry,
     TetrahedronGeometry: THREE.TetrahedronGeometry,
     TextGeometry: THREE.TextGeometry,
     TorusGeometry: THREE.TorusGeometry,
